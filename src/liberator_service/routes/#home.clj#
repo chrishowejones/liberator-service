@@ -26,6 +26,7 @@
   :available-media-types ["application/json"])
 
 (defresource home
+  :available-media-types ["text/html"]
   :exists? (fn [context]
              [(io/get-resource "/home.html")
               {::file (file (str (io/resource-path) "/home.html"))}])
@@ -33,7 +34,7 @@
                (clojure.java.io/input-stream (io/get-resource "/home.html")))
   :last-modified (fn [{{{resource :resource} :route-params} :request}]
                    (.lastModified (file (str (io/resource-path) "/home.html"))))
-  :available-media-types ["text/html"])
+  )
 
 (defroutes home-routes
   (ANY "/" request home)
